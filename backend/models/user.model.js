@@ -20,6 +20,14 @@ const userSchema = new mongoose.Schema({
         required:true,
         minLength:6
     },
+<<<<<<< HEAD
+=======
+    role: {
+        type: String,
+        required: true,
+        enum: ["student", "teacher"]
+    },
+>>>>>>> main
     profileImage:{
         type:String,
         default:""
