@@ -35,6 +35,28 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:""
     },
+    subjects: {
+        type: [String],
+        validate: {
+            validator: function (v) {
+                return v.length <= 3;
+            },
+            message: 'You can select up to 3 subjects.'
+        },
+        default: []
+    },
+    nearestCities: {
+        type: [String],
+        default: []
+    },
+    teachingSubject: {
+        type: String,
+        default: ""
+    },
+    teachingCities: {
+        type: [String],
+        default: []
+    }
 
 },{timestamps:true});
 

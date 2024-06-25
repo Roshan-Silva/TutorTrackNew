@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
 import authRoutes from './routes/auth.routes.js';
+import profileRoutes from './routes/profile.routes.js';
 import connectMongoDB from './db/connectMongoDB.js';
 
 dotenv.config();
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api/auth",authRoutes);
+app.use("/api/profile",profileRoutes);
 
 const startServer = async () => {
   try {
