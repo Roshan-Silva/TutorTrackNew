@@ -19,6 +19,7 @@ app.use(cookieParser());
 app.use("/api/auth",authRoutes);
 app.use("/api/profile",profileRoutes);
 
+
 const startServer = async () => {
   try {
       await connectMongoDB();
