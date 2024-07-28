@@ -42,8 +42,9 @@ export const signup = async (req, res) => {
         });
 
         if(newUser){
-            generateTokenAndSetCookie(newUser._id,res)
+            
             await newUser.save();
+            const jwt = generateTokenAndSetCookie(newUser._id, res);
 
             res.status(201).json({
                 _id: newUser._id,
@@ -52,7 +53,8 @@ export const signup = async (req, res) => {
                 email: newUser.email,
                 role: newUser.role,
                 profileImage: newUser.profileImage,
-                coverImage: newUser.coverImage
+                coverImage: newUser.coverImage,
+                jwtToken:jwt
             })
 
         }else{
@@ -69,25 +71,31 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
     try {
-        const { username, password} = req.body;
-        const user = await User.findOne({username});
-        const isPasswordCorrect = await bcrypt.compare(password,user?.password || "");
-        if(!user ||!isPasswordCorrect){
-            return res.status(400).json({error: "Invalid credentials"});
+        const { email, password } = req.body;
+        
+        // Find user by email
+        const user = await User.findOne({ email });
+        
+        // If user not found or password doesn't match, return error
+        if (!user || !(await bcrypt.compare(password, user.password || ""))) {
+            return res.status(400).json({ error: "Invalid credentials" });
         }
-
-        generateTokenAndSetCookie(user._id,res);
-
-        res.status(200).json({
+    
+        // Generate JWT and set cookie
+        const jwt = generateTokenAndSetCookie(user._id, res);
+    
+        // Return user data and JWT token in response
+        return res.status(200).json({
             _id: user._id,
             fullName: user.fullName,
             username: user.username,
             email: user.email,
             profileImage: user.profileImage,
-            coverImage: user.coverImage
-        })
-        
-    } catch (error) {
+            coverImage: user.coverImage,
+            jwtToken: jwt
+        });
+    
+    }catch (error) {
         console.log("Error in login controller", error.message);
         res.status(500).json({error:"Internal Server Error"});
     }
