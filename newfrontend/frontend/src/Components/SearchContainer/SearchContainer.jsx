@@ -44,7 +44,7 @@ const SearchContainer = ({ searchQuery, setSearchQuery }) => {
       <div className="search-container">
         <input 
           type="text" 
-          placeholder='Search for tutors, city or institutes...' 
+          placeholder='Search for teachers, city or subjects' 
           value={searchQuery}
           onChange={(e) => setSearchTerm(e.target.value)}
         />

@@ -40,7 +40,7 @@ const Navbar = () => {
         <div className={`nav-items ${isMenuOpen ? 'open' : ''}`}>
           <ul>
             <Link className='nav-link-items' to="/" style={{ textDecoration: 'none' }}> <li>home</li> </Link>
-            <Link className='nav-link-items' to="/tutors" style={{ textDecoration: 'none' }}> <li>tutors</li> </Link>
+            {/* <Link className='nav-link-items' to="/tutors" style={{ textDecoration: 'none' }}> <li>tutors</li> </Link> */}
             <Link className='nav-link-items' to="/about-us" style={{ textDecoration: 'none' }}> <li>about us</li> </Link>
             <Link className='nav-link-items' to="/contact-us" style={{ textDecoration: 'none' }}> <li>contact us</li> </Link>
           </ul>
